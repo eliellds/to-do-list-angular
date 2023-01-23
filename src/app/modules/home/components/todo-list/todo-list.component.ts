@@ -10,13 +10,12 @@ import { TaskList } from '../../model/task-list';
 })
 export class TodoListComponent implements OnInit, DoCheck {
 
-  public taskList: Array<TaskList> = [];
+  public taskList: Array<TaskList> = JSON.parse(localStorage.getItem("list") || '[]');
 
   constructor() { }
 
   ngDoCheck(): void {
-    // todos os valores checados vao para baixo e os nao checados vao para cima
-    this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+    this.setLocalStorage();
   }
 
   ngOnInit(): void {
@@ -42,12 +41,23 @@ export class TodoListComponent implements OnInit, DoCheck {
 
   public validationInput(event: string, index: number) {
 
+    // verifica se o usuario deseja excluir a tarefa caso apague toda a descricao
     if (!event.length) {
       const confirm = window.confirm("Task está vazia, deseja deletar?");
 
       if (confirm) {
         this.deleteItemTaskList(index);
       }
+    }
+  }
+
+  public setLocalStorage() {
+
+    if (this.taskList) {
+      // todos os valores checados vao para baixo e os nao checados vao para cima
+      this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+
+      localStorage.setItem("list", JSON.stringify(this.taskList));
     }
   }
 
