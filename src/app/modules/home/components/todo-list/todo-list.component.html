@@ -15,7 +15,7 @@ caso a taskList esteja vazia -->
     
 </section>
 
-<app-todo-input-add-items></app-todo-input-add-items>
+<app-todo-input-add-items (emitItemTaskList)="setEmitTaskList($event)"></app-todo-input-add-items>
 <!-- *ngIf renderiza o elemento apenas se a condicao for verdadeira
 (no caso, se a lista nao estiver vazia) -->
 <app-todo-button-delete-all *ngIf="taskList.length" (click)="deleteAllTaskList()"></app-todo-button-delete-all>
