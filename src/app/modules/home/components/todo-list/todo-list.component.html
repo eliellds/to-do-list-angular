@@ -7,7 +7,7 @@ caso a taskList esteja vazia -->
             <input type="checkbox" [(ngModel)]="item.checked">
             <input type="text" [(ngModel)]="item.task">
 
-            <button>
+            <button (click)="deleteItemTaskList(i)">
                 <img src="assets/icons/icon-trash.svg" alt="">
             </button>
         </li>
@@ -18,4 +18,4 @@ caso a taskList esteja vazia -->
 <app-todo-input-add-items></app-todo-input-add-items>
 <!-- *ngIf renderiza o elemento apenas se a condicao for verdadeira
 (no caso, se a lista nao estiver vazia) -->
-<app-todo-button-delete-all *ngIf="taskList.length"></app-todo-button-delete-all>
+<app-todo-button-delete-all *ngIf="taskList.length" (click)="deleteAllTaskList()"></app-todo-button-delete-all>
